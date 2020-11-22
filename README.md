@@ -1,11 +1,12 @@
 <p align="center">
 	<h1 align="center"> Restaurant </h1>
 	<h4 align="center"> An api to automate functionalities of a restaurant <h4>
+	* The api is deployed @ https://helios-restaurant-api.herokuapp.com/
+	* Ping the route /api-docs to find the docs : https://helios-restaurant-api.herokuapp.com/api-docs
 </p>
 <br>
 	
-* The api is deployed @ https://helios-restaurant-api.herokuapp.com/
-* Ping the route /api-docs to find the docs : https://helios-restaurant-api.herokuapp.com/api-docs
+
   
 ## Functionalities
 - [X]  Allows Admin access to all orders
