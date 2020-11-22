@@ -6,7 +6,6 @@
 	
 
 - The api is deployed : https://helios-restaurant-api.herokuapp.com
-<br>
 - Ping the route /api-docs to find the docs : https://helios-restaurant-api.herokuapp.com/api-docs
   
 ## Functionalities
