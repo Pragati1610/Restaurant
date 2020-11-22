@@ -1,9 +1,6 @@
 <p align="center">
 	<h1 align="center"> Restaurant </h1>
 	<h4 align="center"> An api to automate functionalities of a restaurant <h4>
-	The api is deployed @ https://helios-restaurant-api.herokuapp.com/
-	<br>
-	Ping the route /api-docs to find the docs : https://helios-restaurant-api.herokuapp.com/api-docs
 </p>
 <br>
 	
@@ -15,7 +12,9 @@
 - [X]  Allows customers to create, update and delete their orders
 - [X]  Allows customers to view their orders(for the bill and also in general to crosscheck their order)
 
-
+- The api is deployed : https://helios-restaurant-api.herokuapp.com
+<br>
+- Ping the route /api-docs to find the docs : https://helios-restaurant-api.herokuapp.com/api-docs
 
 ## Instructions to run
 
