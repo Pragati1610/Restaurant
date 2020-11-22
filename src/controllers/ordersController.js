@@ -9,7 +9,7 @@ class OrdersController {
 
     /**
      * This function creates an order
-     * @route POST /orders/
+     * @route POST /orders
      * @group Orders
      * @param {CreateOrderRequest.model} order.body.required
      * @returns {CreateOrderResponse.model} 200 - An object of order info
@@ -18,25 +18,17 @@ class OrdersController {
 
     static async createOrder(order) {
         try {
-            const isOrdered = await Orders.findOne({ customerName: order.customerName, customerContact: order.customerContact });
-            if (isOrdered) {
+            if (order.customerContact.toString().length == 10) {
+                const createdOrder = await Orders.create(order)
                 return {
-                    message: "Order with that credentials already exists",
-                    isOrdered
+                    message: 'order created',
+                    createdOrder
                 };
             } else {
-                if (order.customerContact.length == 10) {
-                    const createdOrder = await Orders.create(order)
-                    return {
-                        message: 'order created',
-                        createdOrder
-                    };
-                } else {
-                    return {
-                        message: 'Contact number is not of 10 digits'
-                    }
+                return {
+                    message: 'Contact number is not of 10 digits',
+                    isError: true
                 }
-
             }
         } catch (e) {
             logger.error(e);
@@ -72,7 +64,7 @@ class OrdersController {
 
     /**
      * This function updates an order
-     * @route PATCH /orders/patchOrder
+     * @route PATCH /orders
      * @group Orders
      * @security JWT
      * @param {PatchYourOrderRequest.model} order.body.required
@@ -113,7 +105,7 @@ class OrdersController {
 
     /**
      * This function updates an order
-     * @route DELETE /orders/cancelOrder
+     * @route DELETE /orders
      * @group Orders
      * @security JWT
      * @returns {DeleteYourOrderResponse.model} 200 - An object of updated order info

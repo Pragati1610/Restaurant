@@ -24,11 +24,15 @@ const router = require('express').Router();
 
 router.post('/', async(req, res) => {
     const salt = bcrypt.genSaltSync(parseInt(process.env.SALT));
+    let response;
     try {
         if (req.body.password.length > 7) {
             req.body.password = bcrypt.hashSync(req.body.password, salt);
-            const response = await orders.createOrder(req.body);
+            response = await orders.createOrder(req.body);
             console.log(response);
+            if (response.isError) {
+                return res.status(422).send(response);
+            }
             const payload = {
                 customerName: response.createdOrder.customerName,
                 customerContact: response.createdOrder.customerContact,
@@ -37,15 +41,16 @@ router.post('/', async(req, res) => {
             const token = jwt.sign(JSON.stringify(payload),
                 process.env.JWT_PASS);
             response.token = token;
+            return res.status(response.isError ? 400 : 200).send(response);
         } else {
-            return {
+            return res.status(422).send({
                 message: 'Password length should be greater than 7 characters'
-            }
+            });
         }
+
     } catch (err) {
         return res.status(403).send(response);
     }
-    return res.status(response.isError ? 400 : 200).send(response);
 });
 
 // GET
@@ -76,7 +81,7 @@ router.get('/', customerAuth, async(req, res) => {
  * @property {Order.model} order
  */
 
-router.patch('/patchOrder', customerAuth, async(req, res) => {
+router.patch('/', customerAuth, async(req, res) => {
     const order = await orders.updateOrder(req.customer, req.body);
     return res.status(order.isError ? 400 : 200).send(order);
 });
@@ -93,7 +98,7 @@ router.patch('/patchOrder', customerAuth, async(req, res) => {
  * @property {Order.model} order
  */
 
-router.delete('/cancelOrder', customerAuth, async(req, res) => {
+router.delete('/', customerAuth, async(req, res) => {
     const order = await orders.deleteOrder(req.customer);
     return res.status(order.isError ? 400 : 200).send(order);
 });
