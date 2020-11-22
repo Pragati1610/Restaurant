@@ -1,6 +1,6 @@
 <p align="center">
 	<h1 align="center"> Restaurant </h1>
-	<h4 align="center"> An api to automate all functionalities in a restaurant <h4>
+	<h4 align="center"> An api to automate functionalities of a restaurant <h4>
 </p>
 <br>
   
